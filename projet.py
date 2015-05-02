@@ -98,13 +98,7 @@ def apropos():
     """
     Cette fonction va simplement faire apparaitre une messagebox avec le texte suivant lorsque l'on clique sur la commande A propos
     """
-    tkinter.messagebox.showinfo("A propos","Ce programme a été créé sous Python 3 à l'aide du logiciel JetBrains PyCharm par Doryan Vidal Madjar, Valentin Le Roux et Thomas Jarrion en classe de Terminale S2 dans le but d'être présenté comme projet de fin d'année en Informatique et Science du Numérique au lycée Jean Baptiste Corot à Savigny sur Orge, enseigné par Mr. Latreyte.")
-
-def commandes():
-    """
-    Cette fonction va simplement faire apparaitre une messagebox avec le texte suivant lorsque l'on clique sur la commande A propos
-    """
-    tkinter.messagebox.showinfo("Commandes","Pour déplacer un objet, il faut qu'il soit séléctionné dans le Notebook et il suffit simplement de maintenir le clic gauche et de bouger la souris.     Si vous souhaitez faire un retour en arriére dans le déplacement, il suffit de faire un clic droit autantde fois que vous voulez de retour en arriére.    Si vous souhaitez remettre un objet à sa position initiale, il suffit d'appuyer sur la touche 'r' de votre clavier.")
+    tkinter.messagebox.showinfo("A propos","Projet de fin d'année en Informatique & Sciences du Numérique\nAnnée 2014-2015, Lycée J.B.Corot (Savigny sur Orge)\nTerminale S2\nEnseignant : Mr Latreyte\n\nOutil de création de visages type portrait robot ver 1.0\n\nDeveloppé par :\n\tDoryan Vidal Madjar\n\tValentin Le Roux\n\tThomas Jarrion\n\nLangage & outils utilisés :\n\tPython 3.4\n\tPillow 2.8.1\n\tJetBrains PyCharm 3.4.1")
 
 def sauver_portrait():
     """
@@ -187,7 +181,6 @@ menufichier.add_command(label="Quitter",command=fenetre.destroy)
 menubar.add_cascade(label="Fichier", menu=menufichier)
 
 menuaide = Menu(menubar,tearoff=0)
-menuaide.add_command(label="Commandes",command=commandes)
 menuaide.add_command(label="A propos",command=apropos)
 menubar.add_cascade(label="Aide", menu=menuaide)
 
