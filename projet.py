@@ -5,7 +5,8 @@ from tkinter import ttk
 from os import *
 import tkinter.messagebox
 import tkinter.filedialog
-from PIL import Image, ImageGrab
+from PIL import Image, ImageGrab, ImageTk
+import random
 
 #Variables globales
 VISAGES = 0
@@ -16,8 +17,9 @@ NEZ = 4
 CHEVEUX = 5
 MAX_VISAGE = 6
 
-LARG_CANVAS = 720
-HAUT_CANVAS = 1000
+LARG_CANVAS = 360
+HAUT_CANVAS = 500
+RESOL_CANVAS = (LARG_CANVAS,HAUT_CANVAS)
 
 #Definition des fonctions
 def charger_images(num : int):
@@ -32,7 +34,9 @@ def charger_images(num : int):
     liste_fichier = listdir(repertoire)                         #Liste contenant les noms de tout les fichiers dans repertoire
     for nomfichier in liste_fichier:
         nomcomplet = repertoire + "/" + nomfichier
-        photo = PhotoImage(file = nomcomplet)
+        image = Image.open(nomcomplet)
+        image = image.resize(RESOL_CANVAS)
+        photo = ImageTk.PhotoImage(image)
         listes_image[num].append(photo)
         nouveau_nom = '.'.join(nomfichier.split('.')[:-1])      #On retire l'extension dans le nom du fichier
         nouveau_nom = str.capitalize(nouveau_nom)
@@ -111,20 +115,28 @@ def sauver_portrait():
     y = canvas_visage.winfo_rooty()
     w = canvas_visage.winfo_width()
     h = canvas_visage.winfo_height()
-    image=ImageGrab.grab((x, y, x+w, y+h))
+    image=ImageGrab.grab((x + 2, y + 2, x+w - 2, y+h - 2))
     image.save(filename)
 
 def nouveau_portrait():
     """
     Cette fonction va permettre de réinitialiser le portrait
     """
-    print("soupe")
+    global canvas_visage, listes_image, objets_canvas
+    for i in range(MAX_VISAGE):
+        nv_image = listes_image[i][0]
+        canvas_visage.itemconfig(objets_canvas[i], image = nv_image)
 
 def portrait_random():
     """
     Cette fonction va permettre de faire apparaitre un portrait aléatoire
     """
-    print("spaghetti")
+    global canvas_visage, listes_image, objets_canvas
+    for i in range(MAX_VISAGE):
+        rand_max = len(listes_image[i]) - 1
+        nb_rand = random.randint(0, rand_max)
+        nv_image = listes_image[i][nb_rand]
+        canvas_visage.itemconfig(objets_canvas[i], image = nv_image)
 
 #Initialisation de la fenétre
 fenetre = Tk()
