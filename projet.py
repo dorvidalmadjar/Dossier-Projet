@@ -5,7 +5,7 @@ from tkinter import ttk
 from os import *
 import tkinter.messagebox
 import tkinter.filedialog
-from PIL import Image, ImageGrab, ImageTk
+from PIL import Image, ImageTk, ImageGrab
 import random
 
 #Variables globales
@@ -106,17 +106,21 @@ def apropos():
 
 def sauver_portrait():
     """
-    Cette fonction va permettre d'enregistrer le contenu de canvas_visage sous forme de jpg
+    Cette fonction va permettre d'enregistrer le contenu de canvas_visage
     """
     global canvas_visage
-    filename = tkinter.filedialog.asksaveasfilename(title="Enregistrer le Portrait",filetypes=[('Jpeg files','.jpeg'),('all files','.*')], defaultextension=".jpeg")
+    if sys.platform == "win32":
+        filename = tkinter.filedialog.asksaveasfilename(title="Enregistrer le Portrait",filetypes=[('Jpeg files','.jpeg'),('all files','.*')], defaultextension=".jpeg")
     #Incrémentation des coordonnées ainsi que la hauteur et largeur du canvas dans l'écran dans des variables
-    x = canvas_visage.winfo_rootx()
-    y = canvas_visage.winfo_rooty()
-    w = canvas_visage.winfo_width()
-    h = canvas_visage.winfo_height()
-    image=ImageGrab.grab((x + 2, y + 2, x+w - 2, y+h - 2))
-    image.save(filename)
+        x = canvas_visage.winfo_rootx()
+        y = canvas_visage.winfo_rooty()
+        w = canvas_visage.winfo_width()
+        h = canvas_visage.winfo_height()
+        image=ImageGrab.grab((x + 2, y + 2, x+w - 2, y+h - 2))
+        image.save(filename)
+    else:
+        filename = tkinter.filedialog.asksaveasfilename(title="Enregistrer le Portrait",filetypes=[('PostScript files','.ps'),('all files','.*')], defaultextension=".ps")
+        canvas_visage.postscript(file= filename, colormode='color')
 
 def nouveau_portrait():
     """
