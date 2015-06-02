@@ -130,6 +130,9 @@ def nouveau_portrait():
     for i in range(MAX_VISAGE):
         nv_image = listes_image[i][0]
         canvas_visage.itemconfig(objets_canvas[i], image = nv_image)
+        canvas_visage.coords(objets_canvas[i],0 ,0) #Changement des coordonnées de l'objet à celle du départ
+        coord_obj_mobile[i] = [] #Remise a zero de l'historique
+
 
 def portrait_random():
     """
@@ -141,6 +144,8 @@ def portrait_random():
         nb_rand = random.randint(0, rand_max)
         nv_image = listes_image[i][nb_rand]
         canvas_visage.itemconfig(objets_canvas[i], image = nv_image)
+        canvas_visage.coords(objets_canvas[i],0 ,0) #Changement des coordonnées de l'objet à celle du départ
+        coord_obj_mobile[i] = [] #Remise a zero de l'historique
 
 #Initialisation de la fenétre
 fenetre = Tk()
